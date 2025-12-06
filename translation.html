@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Language Translator</title>
+  <!-- Bootstrap 5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Bootstrap Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+
+  <!-- Header -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm mb-4">
+    <div class="container">
+      <a class="navbar-brand fw-bold" href="dashboard.html"><i class="bi bi-translate me-2"></i>Language Translator</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="dashboard.html">Dashboard</a></li>
+          <li class="nav-item"><a class="nav-link" href="tripplanner.html">Trip Planner</a></li>
+          <li class="nav-item"><a class="nav-link" href="discover.html">Discover</a></li>
+          <li class="nav-item"><a class="nav-link" href="budget.html">Budget</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container">
+    <!-- Input Section -->
+    <div class="card shadow-sm mb-4">
+      <div class="card-body">
+        <form class="row g-3 align-items-center">
+          <!-- Text Input -->
+          <div class="col-12">
+            <label for="inputText" class="form-label">
+              <i class="bi bi-pencil-square me-2"></i>Enter Text
+            </label>
+            <textarea class="form-control" id="inputText" rows="4" placeholder="Type text here..."></textarea>
+          </div>
+          <!-- Language Dropdown -->
+          <div class="col-md-6">
+            <label for="languageSelect" class="form-label">
+              <i class="bi bi-globe me-2"></i>Choose Language
+            </label>
+            <select class="form-select" id="languageSelect">
+              <option selected>Select language...</option>
+              <option value="es">Spanish</option>
+              <option value="fr">French</option>
+              <option value="de">German</option>
+              <option value="zh">Chinese</option>
+              <option value="hi">Hindi</option>
+            </select>
+          </div>
+          <!-- Translate Button -->
+          <div class="col-md-6 d-grid">
+            <button type="submit" class="btn btn-primary">
+              <i class="bi bi-arrow-right-circle me-2"></i>Translate
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- Output Section -->
+    <div class="card shadow-sm">
+      <div class="card-body">
+        <h5 class="card-title">
+          <i class="bi bi-chat-dots me-2"></i>Translated Text
+        </h5>
+        <p class="card-text text-muted">Your translated text will appear here...</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
