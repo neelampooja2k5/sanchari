@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Sanchari</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+</head>
+<body>
+    <div class="dashboard">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h1><i class="fas fa-map-location-dot"></i> Sanchari</h1>
+            </div>
+
+            <nav class="nav-menu">
+                <a href="#" class="nav-item active" data-section="home">
+                    <i class="fas fa-home"></i>
+                    <span>Home</span>
+                </a>
+                <a href="#" class="nav-item" data-section="map">
+                    <i class="fas fa-map"></i>
+                    <span>Map & Explore</span>
+                </a>
+                <a href="#" class="nav-item" data-section="hotels">
+                    <i class="fas fa-hotel"></i>
+                    <span>Hotels & Stays</span>
+                </a>
+                <a href="#" class="nav-item" data-section="attractions">
+                    <i class="fas fa-star"></i>
+                    <span>Tourist Spots</span>
+                </a>
+                <a href="#" class="nav-item" data-section="itinerary">
+                    <i class="fas fa-calendar"></i>
+                    <span>My Itinerary</span>
+                </a>
+                <a href="#" class="nav-item" data-section="bookings">
+                    <i class="fas fa-ticket"></i>
+                    <span>My Bookings</span>
+                </a>
+                <!-- Profile moved to sidebar footer for easier access -->
+                <a href="#" class="nav-item" data-section="budget">
+                    <i class="fas fa-wallet"></i>
+                    <span>Budget Tracker</span>
+                </a>
+                <a href="#" class="nav-item" data-section="planner">
+                    <i class="fas fa-map-pin"></i>
+                    <span>Trip Planner</span>
+                </a>
+                <a href="#" class="nav-item" data-section="safety">
+                    <i class="fas fa-shield-alt"></i>
+                    <span>Safety Alerts</span>
+                </a>
+                <a href="#" class="nav-item" data-section="translator">
+                    <i class="fas fa-language"></i>
+                    <span>Translator</span>
+                </a>
+            </nav>
+
+            <div class="sidebar-footer">
+                <a href="#" class="nav-item nav-profile" data-section="profile">
+                    <i class="fas fa-user-circle"></i>
+                    <span>Profile</span>
+                </a>
+                <button class="logout-btn">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span>Logout</span>
+                </button>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Top Navigation Bar -->
+            <header class="top-bar">
+                <div class="search-bar">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="Search destinations, hotels, attractions...">
+                </div>
+                <div class="top-icons">
+                    <button class="icon-btn notification-btn">
+                        <i class="fas fa-bell"></i>
+                        <span class="badge">2</span>
+                    </button>
+                    <button class="icon-btn chatbot-toggle" id="chatbotToggle">
+                        <i class="fas fa-robot"></i>
+                    </button>
+                    <div class="user-menu">
+                        <img src="https://via.placeholder.com/40" alt="User">
+                        <span id="userName">User Name</span>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Content Sections -->
+            <div class="content-area">
+
+                <!-- Home Section -->
+                <section id="homeSection" class="content-section active">
+                    <div class="welcome-header">
+                        <h2>Welcome to Sanchari, <span id="welcomeName">Traveler</span>! 👋</h2>
+                        <p class="subtitle">Your personalized dashboard for smart tourism. Access all features, plan your trip, and explore with ease.</p>
+                    </div>
+
+                    <div class="dashboard-grid">
+                        <div class="stat-card" title="Total destinations you've explored">
+                            <div class="stat-icon">
+                                <i class="fas fa-map-marked-alt"></i>
+                            </div>
+                            <div class="stat-content">
+                                <h3>Destinations Explored</h3>
+                                <p class="stat-number">12</p>
+                            </div>
+                        </div>
+                        <div class="stat-card" title="Hotels you've stayed at">
+                            <div class="stat-icon">
+                                <i class="fas fa-hotel"></i>
+                            </div>
+                            <div class="stat-content">
+                                <h3>Hotels Stayed</h3>
+                                <p class="stat-number">5</p>
+                            </div>
+                        </div>
+                        <div class="stat-card" title="Attractions you've visited">
+                            <div class="stat-icon">
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <div class="stat-content">
+                                <h3>Attractions Visited</h3>
+                                <p class="stat-number">28</p>
+                            </div>
+                        </div>
+                        <div class="stat-card" title="Total travel days">
+                            <div class="stat-icon">
+                                <i class="fas fa-calendar-check"></i>
+                            </div>
+                            <div class="stat-content">
+                                <h3>Travel Days</h3>
+                                <p class="stat-number">45</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="featured-section">
+                        <h3>Featured Destinations</h3>
+                        <p class="section-desc">Discover top picks and trending places for your next journey.</p>
+                        <div class="destination-grid">
+                            <div class="destination-card">
+                                <div class="card-image" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+                                    <span class="badge">Popular</span>
+                                </div>
+                                <div class="card-content">
+                                    <h4>Taj Mahal, India</h4>
+                                    <p>Experience the monument of love</p>
+                                    <div class="card-footer">
+                                        <span class="rating"><i class="fas fa-star"></i> 4.8</span>
+                                        <button class="btn-small" title="Learn more about Taj Mahal">Learn More</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="destination-card">
+                                <div class="card-image" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
+                                    <span class="badge">Beach</span>
+                                </div>
+                                <div class="card-content">
+                                    <h4>Maldives</h4>
+                                    <p>Paradise islands await you</p>
+                                    <div class="card-footer">
+                                        <span class="rating"><i class="fas fa-star"></i> 4.9</span>
+                                        <button class="btn-small" title="Learn more about Maldives">Learn More</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="destination-card">
+                                <div class="card-image" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">
+                                    <span class="badge">Adventure</span>
+                                </div>
+                                <div class="card-content">
+                                    <h4>Swiss Alps</h4>
+                                    <p>Mountain adventure beckons</p>
+                                    <div class="card-footer">
+                                        <span class="rating"><i class="fas fa-star"></i> 4.7</span>
+                                        <button class="btn-small" title="Learn more about Swiss Alps">Learn More</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Map Section -->
+                <section id="mapSection" class="content-section">
+                    <h2>Explore with Maps</h2>
+                    <div class="map-container">
+                        <div id="map"></div>
+                        <div class="map-controls">
+                            <button id="toggleOffline" class="control-btn">
+                                <i class="fas fa-download"></i> Offline Mode
+                            </button>
+                            <button id="currentLocation" class="control-btn">
+                                <i class="fas fa-location-arrow"></i> My Location
+                            </button>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Hotels Section -->
+                <section id="hotelsSection" class="content-section">
+                    <h2>Hotels & Accommodations</h2>
+                    <div class="filter-section">
+                        <input type="text" placeholder="Search hotels...">
+                        <select>
+                            <option>Price: Low to High</option>
+                            <option>Price: High to Low</option>
+                            <option>Rating: High to Low</option>
+                        </select>
+                    </div>
+                    <div class="hotels-grid">
+                        <div class="hotel-card">
+                            <div class="hotel-image" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);"></div>
+                            <div class="hotel-content">
+                                <h4>Luxury Hotel & Spa</h4>
+                                <div class="hotel-rating">
+                                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half"></i>
+                                    <span>4.5 (245 reviews)</span>
+                                </div>
+                                <p class="hotel-location"><i class="fas fa-location-dot"></i> Downtown</p>
+                                <div class="hotel-features">
+                                    <span><i class="fas fa-wifi"></i> Free WiFi</span>
+                                    <span><i class="fas fa-utensils"></i> Restaurant</span>
+                                    <span><i class="fas fa-pool"></i> Pool</span>
+                                </div>
+                                <div class="hotel-footer">
+                                    <span class="price">$120/night</span>
+                                    <button class="btn-small">Book Now</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="hotel-card">
+                            <div class="hotel-image" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);"></div>
+                            <div class="hotel-content">
+                                <h4>Boutique Hotel</h4>
+                                <div class="hotel-rating">
+                                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                                    <span>4.3 (189 reviews)</span>
+                                </div>
+                                <p class="hotel-location"><i class="fas fa-location-dot"></i> City Center</p>
+                                <div class="hotel-features">
+                                    <span><i class="fas fa-wifi"></i> Free WiFi</span>
+                                    <span><i class="fas fa-concierge-bell"></i> Concierge</span>
+                                    <span><i class="fas fa-bed"></i> Cozy Rooms</span>
+                                </div>
+                                <div class="hotel-footer">
+                                    <span class="price">$85/night</span>
+                                    <button class="btn-small">Book Now</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Attractions Section -->
+                <section id="attractionsSection" class="content-section">
+                    <h2>Tourist Attractions & Nearby Places</h2>
+                    <div class="attractions-grid">
+                        <div class="attraction-card">
+                            <div class="attraction-image" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);"></div>
+                            <div class="attraction-content">
+                                <h4>Historical Monument</h4>
+                                <div class="attraction-rating">
+                                    <i class="fas fa-star"></i> 4.8 (520 reviews)
+                                </div>
+                                <p><i class="fas fa-location-dot"></i> 2.5 km away</p>
+                                <p>Ancient historical site with rich cultural heritage.</p>
+                                <div class="attraction-footer">
+                                    <button class="btn-small">Get Directions</button>
+                                    <button class="btn-small secondary">Save</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="attraction-card">
+                            <div class="attraction-image" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);"></div>
+                            <div class="attraction-content">
+                                <h4>Nature Park</h4>
+                                <div class="attraction-rating">
+                                    <i class="fas fa-star"></i> 4.6 (380 reviews)
+                                </div>
+                                <p><i class="fas fa-location-dot"></i> 5.3 km away</p>
+                                <p>Beautiful nature reserve with hiking trails and scenic views.</p>
+                                <div class="attraction-footer">
+                                    <button class="btn-small">Get Directions</button>
+                                    <button class="btn-small secondary">Save</button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="attraction-card">
+                            <div class="attraction-image" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);"></div>
+                            <div class="attraction-content">
+                                <h4>Beach Paradise</h4>
+                                <div class="attraction-rating">
+                                    <i class="fas fa-star"></i> 4.9 (650 reviews)
+                                </div>
+                                <p><i class="fas fa-location-dot"></i> 8.1 km away</p>
+                                <p>Pristine beach with water sports and beach activities.</p>
+                                <div class="attraction-footer">
+                                    <button class="btn-small">Get Directions</button>
+                                    <button class="btn-small secondary">Save</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Profile Section -->
+                <section id="profileSection" class="content-section">
+                    <h2>My Profile</h2>
+                    <div class="profile-container">
+                        <div class="profile-header">
+                            <img src="https://via.placeholder.com/120" alt="Profile">
+                            <div class="profile-info">
+                                <h3 id="profileName">User Name</h3>
+                                <p id="profileEmail">user@email.com</p>
+                                <button class="btn-primary">Edit Profile</button>
+                            </div>
+                        </div>
+
+                        <div class="profile-details">
+                            <div class="detail-group">
+                                <h4>Personal Information</h4>
+                                <p><strong>Phone:</strong> <span id="profilePhone">+1234567890</span></p>
+                                <p><strong>Country:</strong> <span id="profileCountry">India</span></p>
+                                <p><strong>Member Since:</strong> <span id="profileJoinDate">January 2024</span></p>
+                            </div>
+
+                            <div class="detail-group">
+                                <h4>Travel Preferences</h4>
+                                <div class="preferences-list">
+                                    <span class="preference-tag">Adventure</span>
+                                    <span class="preference-tag">Culture</span>
+                                    <span class="preference-tag">Nature</span>
+                                </div>
+                            </div>
+
+                            <div class="detail-group">
+                                <h4>Account Settings</h4>
+                                <a href="#">Change Password</a>
+                                <a href="#">Privacy Settings</a>
+                                <a href="#">Notification Preferences</a>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Budget Tracker Section -->
+                <section id="budgetSection" class="content-section">
+                    <h2><i class="fas fa-wallet"></i> Budget Tracker</h2>
+                    <p class="section-desc">Track your travel expenses and manage your budget efficiently.</p>
+                    
+                    <div class="budget-container">
+                        <div class="budget-overview">
+                            <div class="budget-card">
+                                <h3>Total Budget</h3>
+                                <p class="budget-amount">$5,000</p>
+                            </div>
+                            <div class="budget-card">
+                                <h3>Spent</h3>
+                                <p class="budget-amount spent">$2,340</p>
+                            </div>
+                            <div class="budget-card">
+                                <h3>Remaining</h3>
+                                <p class="budget-amount remaining">$2,660</p>
+                            </div>
+                        </div>
+
+                        <div class="budget-form">
+                            <h3>Add Expense</h3>
+                            <form id="expenseForm">
+                                <div class="form-row">
+                                    <input type="text" placeholder="Expense Description" required>
+                                    <input type="number" placeholder="Amount ($)" required>
+                                    <select required>
+                                        <option>Accommodation</option>
+                                        <option>Food</option>
+                                        <option>Transport</option>
+                                        <option>Activities</option>
+                                        <option>Shopping</option>
+                                        <option>Other</option>
+                                    </select>
+                                    <button type="submit" class="btn-primary">Add Expense</button>
+                                </div>
+                            </form>
+                        </div>
+
+                        <div class="expenses-list">
+                            <h3>Recent Expenses</h3>
+                            <table class="expenses-table">
+                                <thead>
+                                    <tr>
+                                        <th>Description</th>
+                                        <th>Category</th>
+                                        <th>Amount</th>
+                                        <th>Date</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Hotel Stay</td>
+                                        <td><span class="category-badge">Accommodation</span></td>
+                                        <td>$150</td>
+                                        <td>Dec 1</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Restaurant Dinner</td>
+                                        <td><span class="category-badge">Food</span></td>
+                                        <td>$45</td>
+                                        <td>Dec 2</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Trip Planner Section -->
+                <section id="plannerSection" class="content-section">
+                    <h2><i class="fas fa-map-pin"></i> Trip Planner</h2>
+                    <p class="section-desc">Plan your trip day by day with activities and bookings.</p>
+                    
+                    <div class="planner-container">
+                        <div class="planner-form">
+                            <h3>Create New Trip</h3>
+                            <form id="tripForm">
+                                <div class="form-group">
+                                    <label>Destination</label>
+                                    <input type="text" placeholder="Where are you going?" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>Start Date</label>
+                                    <input type="date" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>End Date</label>
+                                    <input type="date" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>Budget</label>
+                                    <input type="number" placeholder="Total budget ($)" required>
+                                </div>
+                                <button type="submit" class="btn-primary">Create Trip</button>
+                            </form>
+                        </div>
+
+                        <div class="trips-list">
+                            <h3>My Trips</h3>
+                            <div class="trip-cards">
+                                <div class="trip-card">
+                                    <div class="trip-header">
+                                        <h4>India Tour</h4>
+                                        <span class="trip-status">Active</span>
+                                    </div>
+                                    <p><i class="fas fa-map-pin"></i> Delhi, Agra, Jaipur</p>
+                                    <p><i class="fas fa-calendar"></i> Dec 1 - Dec 15, 2025</p>
+                                    <p><i class="fas fa-wallet"></i> Budget: $3,000</p>
+                                    <button class="btn-small">View Details</button>
+                                </div>
+                                <div class="trip-card">
+                                    <div class="trip-header">
+                                        <h4>Goa Beach Getaway</h4>
+                                        <span class="trip-status completed">Completed</span>
+                                    </div>
+                                    <p><i class="fas fa-map-pin"></i> Goa</p>
+                                    <p><i class="fas fa-calendar"></i> Nov 10 - Nov 17, 2025</p>
+                                    <p><i class="fas fa-wallet"></i> Budget: $1,500</p>
+                                    <button class="btn-small">Review</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Safety Alerts Section -->
+                <section id="safetySection" class="content-section">
+                    <h2><i class="fas fa-shield-alt"></i> Safety Alerts</h2>
+                    <p class="section-desc">Stay informed about safety conditions in your travel destination.</p>
+                    
+                    <div class="safety-container">
+                        <div class="alerts-list">
+                            <div class="alert-card alert-warning">
+                                <div class="alert-icon">
+                                    <i class="fas fa-exclamation-triangle"></i>
+                                </div>
+                                <div class="alert-content">
+                                    <h4>Weather Alert</h4>
+                                    <p>Heavy rainfall expected in Goa region from Dec 10-12. Check weather updates before traveling.</p>
+                                    <small>Updated 2 hours ago</small>
+                                </div>
+                            </div>
+
+                            <div class="alert-card alert-info">
+                                <div class="alert-icon">
+                                    <i class="fas fa-info-circle"></i>
+                                </div>
+                                <div class="alert-content">
+                                    <h4>Travel Advisory</h4>
+                                    <p>Normal travel conditions in India. Enjoy your trip and follow local guidelines.</p>
+                                    <small>Updated 1 day ago</small>
+                                </div>
+                            </div>
+
+                            <div class="alert-card alert-danger">
+                                <div class="alert-icon">
+                                    <i class="fas fa-ban"></i>
+                                </div>
+                                <div class="alert-content">
+                                    <h4>Road Closure</h4>
+                                    <p>NH2 highway under maintenance. Use alternate routes. Plan extra travel time.</p>
+                                    <small>Updated 4 hours ago</small>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="safety-tips">
+                            <h3>Safety Tips</h3>
+                            <ul class="tips-list">
+                                <li><i class="fas fa-check-circle"></i> Always keep travel documents and insurance handy</li>
+                                <li><i class="fas fa-check-circle"></i> Share your itinerary with friends and family</li>
+                                <li><i class="fas fa-check-circle"></i> Use registered taxis and avoid traveling alone at night</li>
+                                <li><i class="fas fa-check-circle"></i> Keep emergency contacts saved in your phone</li>
+                                <li><i class="fas fa-check-circle"></i> Stay hydrated and follow local health guidelines</li>
+                                <li><i class="fas fa-check-circle"></i> Register with your embassy if traveling abroad</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Translator Section -->
+                <section id="translatorSection" class="content-section">
+                    <h2><i class="fas fa-language"></i> Translator</h2>
+                    <p class="section-desc">Translate text to communicate in local languages.</p>
+                    
+                    <div class="translator-container">
+                        <div class="translator-form">
+                            <div class="translator-inputs">
+                                <div class="input-group">
+                                    <label>From Language</label>
+                                    <select id="fromLang">
+                                        <option value="en">English</option>
+                                        <option value="es">Spanish</option>
+                                        <option value="fr">French</option>
+                                        <option value="de">German</option>
+                                        <option value="hi">Hindi</option>
+                                        <option value="zh">Chinese</option>
+                                        <option value="ja">Japanese</option>
+                                    </select>
+                                </div>
+                                <button class="swap-btn" title="Swap languages"><i class="fas fa-exchange-alt"></i></button>
+                                <div class="input-group">
+                                    <label>To Language</label>
+                                    <select id="toLang">
+                                        <option value="en">English</option>
+                                        <option value="es">Spanish</option>
+                                        <option value="fr">French</option>
+                                        <option value="de">German</option>
+                                        <option value="hi">Hindi</option>
+                                        <option value="zh">Chinese</option>
+                                        <option value="ja">Japanese</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="translator-text">
+                                <div class="text-input">
+                                    <textarea id="textToTranslate" placeholder="Enter text to translate..." rows="4"></textarea>
+                                </div>
+                                <button class="btn-primary" id="translateBtn"><i class="fas fa-exchange-alt"></i> Translate</button>
+                                <div class="text-output">
+                                    <div id="translatedText" class="translated-output">Translation will appear here...</div>
+                                    <button class="copy-btn" id="copyBtn" title="Copy translation"><i class="fas fa-copy"></i></button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="common-phrases">
+                            <h3>Common Travel Phrases</h3>
+                            <div class="phrases-grid">
+                                <div class="phrase-card">
+                                    <p class="phrase-en">Hello</p>
+                                    <p class="phrase-local">नमस्ते (Namaste)</p>
+                                </div>
+                                <div class="phrase-card">
+                                    <p class="phrase-en">Thank You</p>
+                                    <p class="phrase-local">धन्यवाद (Dhanyavaad)</p>
+                                </div>
+                                <div class="phrase-card">
+                                    <p class="phrase-en">Where is...?</p>
+                                    <p class="phrase-local">...कहाँ है? (...kahaan hai?)</p>
+                                </div>
+                                <div class="phrase-card">
+                                    <p class="phrase-en">How much does it cost?</p>
+                                    <p class="phrase-local">यह कितना खर्च करता है? (Yah kitna kharach karta hai?)</p>
+                                </div>
+                                <div class="phrase-card">
+                                    <p class="phrase-en">Can you help me?</p>
+                                    <p class="phrase-local">क्या आप मेरी मदद कर सकते हैं? (Kya aap meri madad kar sakte hain?)</p>
+                                </div>
+                                <div class="phrase-card">
+                                    <p class="phrase-en">I need a doctor</p>
+                                    <p class="phrase-local">मुझे डॉक्टर की जरूरत है। (Mujhe doctor ki zarorat hai.)</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+            </div>
+        </main>
+    </div>
+
+    <!-- Chatbot Modal -->
+    <div id="chatbotModal" class="chatbot-modal">
+        <div class="chatbot-container">
+                <div class="chatbot-header">
+                <div class="chatbot-title">
+                    <i class="fas fa-robot"></i>
+                    <h3>Sanchari</h3>
+                    <p>Your AI Travel Assistant</p>
+                </div>
+                <button class="close-btn" id="closeChatbot">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+
+            <div class="chatbot-messages" id="chatMessages">
+                <div class="message bot-message">
+                    <p>Hello! I'm Sanchari, your AI travel assistant. How can I help you plan your next adventure? 🌍</p>
+                </div>
+            </div>
+
+            <div class="chatbot-input">
+                <input type="text" id="chatInput" placeholder="Ask me anything about travel...">
+                <button id="sendChatBtn">
+                    <i class="fas fa-paper-plane"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Success Message Toast -->
+    <div id="toast" class="toast"></div>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="js/dashboard.js"></script>
+    <script src="js/chatbot.js"></script>
+</body>
+</html>

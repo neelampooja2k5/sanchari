@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register - Sanchari</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="register-container">
+        <div class="register-wrapper">
+            <div class="register-card">
+                <div class="header">
+                    <h1>Join Sanchari</h1>
+                    <p>Create your travel profile today</p>
+                </div>
+
+                <form id="registerForm" class="register-form">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="firstName">
+                                <i class="fas fa-user"></i>
+                                First Name
+                            </label>
+                            <input type="text" id="firstName" name="firstName" placeholder="Your first name" required>
+                            <span class="error-message" id="firstNameError"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="lastName">
+                                <i class="fas fa-user"></i>
+                                Last Name
+                            </label>
+                            <input type="text" id="lastName" name="lastName" placeholder="Your last name" required>
+                            <span class="error-message" id="lastNameError"></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="regEmail">
+                            <i class="fas fa-envelope"></i>
+                            Email Address
+                        </label>
+                        <input type="email" id="regEmail" name="email" placeholder="Enter your email" required>
+                        <span class="error-message" id="regEmailError"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="phone">
+                            <i class="fas fa-phone"></i>
+                            Phone Number
+                        </label>
+                        <input type="tel" id="phone" name="phone" placeholder="Your phone number" required>
+                        <span class="error-message" id="phoneError"></span>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="regPassword">
+                                <i class="fas fa-lock"></i>
+                                Password
+                            </label>
+                            <input type="password" id="regPassword" name="password" placeholder="Create a password" required>
+                            <span class="error-message" id="regPasswordError"></span>
+                            <div class="password-strength">
+                                <div class="strength-bar" id="strengthBar"></div>
+                                <small id="strengthText">Weak</small>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="confirmPassword">
+                                <i class="fas fa-lock"></i>
+                                Confirm Password
+                            </label>
+                            <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirm password" required>
+                            <span class="error-message" id="confirmPasswordError"></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="country">
+                            <i class="fas fa-globe"></i>
+                            Country
+                        </label>
+                        <input type="text" id="country" name="country" placeholder="Your country" required>
+                        <span class="error-message" id="countryError"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="interests">
+                            <i class="fas fa-heart"></i>
+                            Travel Interests
+                        </label>
+                        <div class="interest-checkboxes">
+                            <label><input type="checkbox" name="interests" value="adventure"> Adventure</label>
+                            <label><input type="checkbox" name="interests" value="culture"> Culture</label>
+                            <label><input type="checkbox" name="interests" value="nature"> Nature</label>
+                            <label><input type="checkbox" name="interests" value="beach"> Beach</label>
+                            <label><input type="checkbox" name="interests" value="historical"> Historical</label>
+                        </div>
+                    </div>
+
+                    <div class="form-group checkbox">
+                        <label>
+                            <input type="checkbox" id="termsCheck" name="terms" required>
+                            I agree to the <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>
+                        </label>
+                        <span class="error-message" id="termsError"></span>
+                    </div>
+
+                    <button type="submit" class="register-btn">
+                        <i class="fas fa-user-plus"></i> Create Account
+                    </button>
+                </form>
+
+                <div class="login-prompt">
+                    <p>Already have an account? <a href="login.html">Sign In</a></p>
+                </div>
+            </div>
+
+            <div class="register-image">
+                <div class="image-content">
+                    <div class="benefit-box">
+                        <i class="fas fa-check-circle"></i>
+                        <h3>Personalized Recommendations</h3>
+                    </div>
+                    <div class="benefit-box">
+                        <i class="fas fa-check-circle"></i>
+                        <h3>Exclusive Travel Deals</h3>
+                    </div>
+                    <div class="benefit-box">
+                        <i class="fas fa-check-circle"></i>
+                        <h3>24/7 Travel Support</h3>
+                    </div>
+                    <div class="benefit-box">
+                        <i class="fas fa-check-circle"></i>
+                        <h3>Offline Access Features</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/register.js"></script>
+</body>
+</html>

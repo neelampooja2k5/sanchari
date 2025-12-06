@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sanchari - Smart Tourism Platform</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="login-container">
+        <div class="login-wrapper">
+            <div class="login-card">
+                <div class="logo-section">
+                    <div class="logo">
+                        <i class="fas fa-map-location-dot"></i>
+                    </div>
+                    <h1>Sanchari</h1>
+                    <p class="tagline">Your Smart Travel Companion</p>
+                </div>
+
+                <form id="loginForm" class="login-form">
+                    <div class="form-group">
+                        <label for="email">
+                            <i class="fas fa-envelope"></i>
+                            Email Address
+                        </label>
+                        <input type="email" id="email" name="email" placeholder="Enter your email" required>
+                        <span class="error-message" id="emailError"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="password">
+                            <i class="fas fa-lock"></i>
+                            Password
+                        </label>
+                        <div class="password-container">
+                            <input type="password" id="password" name="password" placeholder="Enter your password" required>
+                            <button type="button" class="toggle-password" id="togglePassword">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                        </div>
+                        <span class="error-message" id="passwordError"></span>
+                    </div>
+
+                    <div class="form-group remember-forgot">
+                        <label class="remember">
+                            <input type="checkbox" name="remember"> Remember me
+                        </label>
+                        <a href="#" class="forgot-password">Forgot Password?</a>
+                    </div>
+
+                    <button type="submit" class="login-btn">
+                        <i class="fas fa-sign-in-alt"></i> Login
+                    </button>
+                </form>
+
+                <div class="divider">
+                    <span>or</span>
+                </div>
+
+                <div class="demo-info" style="background: #f0f4ff; border: 1px solid #667eea; border-radius: 8px; padding: 12px; margin: 12px 0; font-size: 13px; color: #333;">
+                    <strong>📝 Demo Credentials:</strong><br>
+                    Email: <code>demo@example.com</code> | Password: <code>password123</code><br>
+                    Or try: <code>user@sanchari.com</code> | Password: <code>sanchari123</code>
+                </div>
+
+                <div class="divider">
+                    <span>Quick Login</span>
+                </div>
+
+                <div class="social-login">
+                    <button class="social-btn google-btn" title="Login with Google account">
+                        <i class="fab fa-google"></i>
+                        <span class="social-label">Google</span>
+                    </button>
+                    <button class="social-btn facebook-btn" title="Login with Facebook account">
+                        <i class="fab fa-facebook"></i>
+                        <span class="social-label">Facebook</span>
+                    </button>
+                    <button class="social-btn twitter-btn" title="Login with Twitter account">
+                        <i class="fab fa-twitter"></i>
+                        <span class="social-label">Twitter</span>
+                    </button>
+                </div>
+
+                <div class="signup-prompt">
+                    <p>Don't have an account? <a href="register.html">Sign Up</a></p>
+                </div>
+            </div>
+
+            <div class="login-image">
+                <div class="image-content">
+                    <div class="feature-box">
+                        <i class="fas fa-map"></i>
+                        <h3>Offline Maps</h3>
+                        <p>Explore anywhere without internet</p>
+                    </div>
+                    <div class="feature-box">
+                        <i class="fas fa-robot"></i>
+                        <h3>Sanchari AI</h3>
+                        <p>Your personal travel assistant</p>
+                    </div>
+                    <div class="feature-box">
+                        <i class="fas fa-location-dot"></i>
+                        <h3>Nearby Places</h3>
+                        <p>Discover tourist spots & hotels</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/login.js"></script>
+</body>
+</html>
