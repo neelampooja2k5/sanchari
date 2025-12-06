@@ -4,6 +4,18 @@ const togglePasswordBtn = document.getElementById('togglePassword');
 const passwordInput = document.getElementById('password');
 const emailInput = document.getElementById('email');
 
+// Demo User Database - users who have registered
+const registeredUsers = [
+    { email: 'demo@example.com', password: 'password123', name: 'Demo User' },
+    { email: 'user@sanchari.com', password: 'sanchari123', name: 'Sanchari User' },
+    { email: 'test@test.com', password: 'test1234', name: 'Test Account' }
+];
+
+// Function to find user by email and password
+function validateUserCredentials(email, password) {
+    return registeredUsers.find(user => user.email === email && user.password === password);
+}
+
 // Toggle Password Visibility
 togglePasswordBtn.addEventListener('click', () => {
     const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
@@ -85,57 +97,31 @@ loginForm.addEventListener('submit', async (e) => {
 
     if (!isValid) return;
 
-    // Simulate login API call
-    try {
-        const response = await fetch('http://localhost:3000/api/auth/login', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                email: emailInput.value,
-                password: passwordInput.value
-            })
-        });
-
-        if (response.ok) {
-            const data = await response.json();
-            localStorage.setItem('user', JSON.stringify(data.user));
-            localStorage.setItem('token', data.token);
-            window.location.href = 'dashboard.html';
-        } else {
-            showError(emailInput, 'Invalid email or password');
-        }
-    } catch (error) {
-        console.error('Login error:', error);
-        // For demo purposes, allow login
+    // Check against demo user database
+    const user = validateUserCredentials(emailInput.value, passwordInput.value);
+    
+    if (user) {
+        // User found - login successful
         localStorage.setItem('user', JSON.stringify({
-            email: emailInput.value,
-            name: emailInput.value.split('@')[0]
+            email: user.email,
+            name: user.name
         }));
+        localStorage.setItem('token', 'token-' + user.email);
         window.location.href = 'dashboard.html';
+    } else {
+        // User not found or wrong password
+        showError(emailInput, 'Invalid email or password. Not registered?');
     }
 });
 
-// Social Login Buttons - simulated login (works immediately without backend)
-function socialLogin(provider) {
-    const demoUser = {
-        name: provider.charAt(0).toUpperCase() + provider.slice(1) + ' User',
-        email: provider.toLowerCase() + '@example.com',
-        provider: provider
-    };
-    localStorage.setItem('user', JSON.stringify(demoUser));
-    localStorage.setItem('token', 'demo-' + provider + '-token');
-    window.location.href = 'dashboard.html';
-}
-
+// Social Login Buttons - Redirect to provider-specific login pages
 const googleBtn = document.querySelector('.google-btn');
 const facebookBtn = document.querySelector('.facebook-btn');
 const twitterBtn = document.querySelector('.twitter-btn');
 
-if (googleBtn) googleBtn.addEventListener('click', (e) => { e.preventDefault(); socialLogin('google'); });
-if (facebookBtn) facebookBtn.addEventListener('click', (e) => { e.preventDefault(); socialLogin('facebook'); });
-if (twitterBtn) twitterBtn.addEventListener('click', (e) => { e.preventDefault(); socialLogin('twitter'); });
+if (googleBtn) googleBtn.addEventListener('click', (e) => { e.preventDefault(); window.location.href = 'google_login.html'; });
+if (facebookBtn) facebookBtn.addEventListener('click', (e) => { e.preventDefault(); window.location.href = 'facebook_login.html'; });
+if (twitterBtn) twitterBtn.addEventListener('click', (e) => { e.preventDefault(); window.location.href = 'twitter_login.html'; });
 
 // Forgot Password
 document.querySelector('.forgot-password').addEventListener('click', (e) => {

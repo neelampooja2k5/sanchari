@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Twitter Login - Sanchari</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .oauth-container { min-height: 100vh; display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 20px; }
+        .oauth-card { background: white; padding: 40px; border-radius: 15px; box-shadow: 0 10px 40px rgba(0,0,0,0.15); max-width: 500px; width: 100%; }
+        .oauth-header { text-align: center; margin-bottom: 30px; }
+        .oauth-icon { width: 80px; height: 80px; background: linear-gradient(135deg, #1da1f2 0%, #0d7fb8 100%); border-radius: 15px; display: flex; align-items: center; justify-content: center; font-size: 40px; color: white; margin: 0 auto 15px; }
+        .oauth-header h1 { font-size: 28px; color: #2d3436; margin-bottom: 5px; }
+        .oauth-header p { color: #636e72; font-size: 14px; }
+        .form-group { display: flex; flex-direction: column; gap: 8px; margin-bottom: 20px; }
+        .form-group label { color: #2d3436; font-weight: 600; font-size: 14px; }
+        .form-group input { padding: 12px 15px; border: 2px solid #dfe6e9; border-radius: 8px; font-size: 14px; transition: all 0.3s ease; }
+        .form-group input:focus { outline: none; border-color: #1da1f2; box-shadow: 0 0 0 3px rgba(29, 161, 242, 0.1); }
+        .error-message { color: #ff6b6b; font-size: 12px; margin-top: 4px; }
+        .form-group input.error { border-color: #ff6b6b; }
+        .btn { padding: 12px 20px; border: none; border-radius: 8px; font-size: 16px; font-weight: 600; cursor: pointer; transition: all 0.3s ease; width: 100%; }
+        .btn-primary { background: #1da1f2; color: white; }
+        .btn-primary:hover { background: #0d7fb8; transform: translateY(-2px); box-shadow: 0 4px 12px rgba(29, 161, 242, 0.3); }
+        .btn-back { background: #f0f4ff; color: #667eea; margin-top: 15px; }
+        .btn-back:hover { background: #e6ecff; }
+        .info-text { background: #e0f7ff; border-left: 4px solid #1da1f2; padding: 12px; border-radius: 4px; margin-bottom: 20px; font-size: 13px; color: #094a66; }
+        .divider { text-align: center; margin: 25px 0; color: #636e72; }
+    </style>
+</head>
+<body>
+    <div class="oauth-container">
+        <div class="oauth-card">
+            <div class="oauth-header">
+                <div class="oauth-icon">
+                    <i class="fab fa-twitter"></i>
+                </div>
+                <h1>Twitter Login</h1>
+                <p>Continue to Sanchari with your Twitter Account</p>
+            </div>
+
+            <div class="info-text">
+                <i class="fas fa-info-circle"></i> Enter your Twitter account details to sign in
+            </div>
+
+            <form id="twitterLoginForm">
+                <div class="form-group">
+                    <label for="twitterHandle">Twitter Handle or Email</label>
+                    <input type="text" id="twitterHandle" name="handle" placeholder="@username or your.email@example.com" required>
+                    <span class="error-message" id="twitterHandleError"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="twitterPassword">Twitter Password</label>
+                    <input type="password" id="twitterPassword" name="password" placeholder="Enter your password" required>
+                    <span class="error-message" id="twitterPasswordError"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="twitterName">Full Name</label>
+                    <input type="text" id="twitterName" name="name" placeholder="Your full name" required>
+                    <span class="error-message" id="twitterNameError"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="twitterBio">Bio (Optional)</label>
+                    <input type="text" id="twitterBio" name="bio" placeholder="Tell us about yourself" maxlength="160">
+                </div>
+
+                <button type="submit" class="btn btn-primary">
+                    <i class="fas fa-sign-in-alt"></i> Login with Twitter
+                </button>
+                <button type="button" class="btn btn-back" onclick="window.location.href='login.html'">
+                    <i class="fas fa-arrow-left"></i> Back to Login
+                </button>
+            </form>
+
+            <div class="divider">
+                <small>Your data is secure and encrypted</small>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const form = document.getElementById('twitterLoginForm');
+        const handleInput = document.getElementById('twitterHandle');
+        const passwordInput = document.getElementById('twitterPassword');
+        const nameInput = document.getElementById('twitterName');
+        const bioInput = document.getElementById('twitterBio');
+
+        function clearError(input) {
+            const errorEl = document.getElementById(input.id + 'Error');
+            if (errorEl) errorEl.textContent = '';
+            input.classList.remove('error');
+        }
+
+        function showError(input, message) {
+            const errorEl = document.getElementById(input.id + 'Error');
+            if (errorEl) errorEl.textContent = message;
+            input.classList.add('error');
+        }
+
+        function isValidEmail(email) {
+            return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+        }
+
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            clearError(handleInput);
+            clearError(passwordInput);
+            clearError(nameInput);
+
+            let isValid = true;
+
+            if (!handleInput.value) {
+                showError(handleInput, 'Twitter handle or email is required');
+                isValid = false;
+            } else {
+                const value = handleInput.value.trim();
+                const isHandle = value.startsWith('@') && /^@\w{1,15}$/.test(value);
+                const isEmail = isValidEmail(value);
+                if (!isHandle && !isEmail) {
+                    showError(handleInput, 'Please use a valid Twitter handle (@username) or email');
+                    isValid = false;
+                }
+            }
+
+            if (!passwordInput.value) {
+                showError(passwordInput, 'Password is required');
+                isValid = false;
+            } else if (passwordInput.value.length < 6) {
+                showError(passwordInput, 'Invalid password');
+                isValid = false;
+            }
+
+            if (!nameInput.value) {
+                showError(nameInput, 'Name is required');
+                isValid = false;
+            }
+
+            if (isValid) {
+                // Store Twitter login info
+                localStorage.setItem('user', JSON.stringify({
+                    name: nameInput.value,
+                    handle: handleInput.value,
+                    bio: bioInput.value || '',
+                    provider: 'twitter'
+                }));
+                localStorage.setItem('token', 'twitter-oauth-token-' + Date.now());
+                window.location.href = 'dashboard.html';
+            }
+        });
+    </script>
+</body>
+</html>

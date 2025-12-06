@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Facebook Login - Sanchari</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .oauth-container { min-height: 100vh; display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 20px; }
+        .oauth-card { background: white; padding: 40px; border-radius: 15px; box-shadow: 0 10px 40px rgba(0,0,0,0.15); max-width: 500px; width: 100%; }
+        .oauth-header { text-align: center; margin-bottom: 30px; }
+        .oauth-icon { width: 80px; height: 80px; background: linear-gradient(135deg, #1877f2 0%, #0a66c2 100%); border-radius: 15px; display: flex; align-items: center; justify-content: center; font-size: 40px; color: white; margin: 0 auto 15px; }
+        .oauth-header h1 { font-size: 28px; color: #2d3436; margin-bottom: 5px; }
+        .oauth-header p { color: #636e72; font-size: 14px; }
+        .form-group { display: flex; flex-direction: column; gap: 8px; margin-bottom: 20px; }
+        .form-group label { color: #2d3436; font-weight: 600; font-size: 14px; }
+        .form-group input { padding: 12px 15px; border: 2px solid #dfe6e9; border-radius: 8px; font-size: 14px; transition: all 0.3s ease; }
+        .form-group input:focus { outline: none; border-color: #1877f2; box-shadow: 0 0 0 3px rgba(24, 119, 242, 0.1); }
+        .error-message { color: #ff6b6b; font-size: 12px; margin-top: 4px; }
+        .form-group input.error { border-color: #ff6b6b; }
+        .btn { padding: 12px 20px; border: none; border-radius: 8px; font-size: 16px; font-weight: 600; cursor: pointer; transition: all 0.3s ease; width: 100%; }
+        .btn-primary { background: #1877f2; color: white; }
+        .btn-primary:hover { background: #0a66c2; transform: translateY(-2px); box-shadow: 0 4px 12px rgba(24, 119, 242, 0.3); }
+        .btn-back { background: #f0f4ff; color: #667eea; margin-top: 15px; }
+        .btn-back:hover { background: #e6ecff; }
+        .info-text { background: #e7f3ff; border-left: 4px solid #1877f2; padding: 12px; border-radius: 4px; margin-bottom: 20px; font-size: 13px; color: #0c5aa0; }
+        .divider { text-align: center; margin: 25px 0; color: #636e72; }
+    </style>
+</head>
+<body>
+    <div class="oauth-container">
+        <div class="oauth-card">
+            <div class="oauth-header">
+                <div class="oauth-icon">
+                    <i class="fab fa-facebook"></i>
+                </div>
+                <h1>Facebook Login</h1>
+                <p>Continue to Sanchari with your Facebook Account</p>
+            </div>
+
+            <div class="info-text">
+                <i class="fas fa-info-circle"></i> Enter your Facebook account details to sign in
+            </div>
+
+            <form id="facebookLoginForm">
+                <div class="form-group">
+                    <label for="facebookEmail">Facebook Email or Phone</label>
+                    <input type="text" id="facebookEmail" name="email" placeholder="your.email@example.com or phone number" required>
+                    <span class="error-message" id="facebookEmailError"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="facebookPassword">Facebook Password</label>
+                    <input type="password" id="facebookPassword" name="password" placeholder="Enter your password" required>
+                    <span class="error-message" id="facebookPasswordError"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="facebookName">Full Name</label>
+                    <input type="text" id="facebookName" name="name" placeholder="Your full name" required>
+                    <span class="error-message" id="facebookNameError"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="facebookPhone">Phone Number (Optional)</label>
+                    <input type="tel" id="facebookPhone" name="phone" placeholder="+1 (555) 123-4567">
+                </div>
+
+                <button type="submit" class="btn btn-primary">
+                    <i class="fas fa-sign-in-alt"></i> Login with Facebook
+                </button>
+                <button type="button" class="btn btn-back" onclick="window.location.href='login.html'">
+                    <i class="fas fa-arrow-left"></i> Back to Login
+                </button>
+            </form>
+
+            <div class="divider">
+                <small>Your data is secure and encrypted</small>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const form = document.getElementById('facebookLoginForm');
+        const emailInput = document.getElementById('facebookEmail');
+        const passwordInput = document.getElementById('facebookPassword');
+        const nameInput = document.getElementById('facebookName');
+        const phoneInput = document.getElementById('facebookPhone');
+
+        function clearError(input) {
+            const errorEl = document.getElementById(input.id + 'Error');
+            if (errorEl) errorEl.textContent = '';
+            input.classList.remove('error');
+        }
+
+        function showError(input, message) {
+            const errorEl = document.getElementById(input.id + 'Error');
+            if (errorEl) errorEl.textContent = message;
+            input.classList.add('error');
+        }
+
+        function isValidEmail(email) {
+            return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+        }
+
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            clearError(emailInput);
+            clearError(passwordInput);
+            clearError(nameInput);
+
+            let isValid = true;
+
+            if (!emailInput.value) {
+                showError(emailInput, 'Email or phone is required');
+                isValid = false;
+            } else if (!isValidEmail(emailInput.value) && !/^\d{10,}$/.test(emailInput.value.replace(/\D/g, ''))) {
+                showError(emailInput, 'Please use a valid email or phone number');
+                isValid = false;
+            }
+
+            if (!passwordInput.value) {
+                showError(passwordInput, 'Password is required');
+                isValid = false;
+            } else if (passwordInput.value.length < 6) {
+                showError(passwordInput, 'Invalid password');
+                isValid = false;
+            }
+
+            if (!nameInput.value) {
+                showError(nameInput, 'Name is required');
+                isValid = false;
+            }
+
+            if (isValid) {
+                // Store Facebook login info
+                localStorage.setItem('user', JSON.stringify({
+                    name: nameInput.value,
+                    email: emailInput.value,
+                    phone: phoneInput.value || '',
+                    provider: 'facebook'
+                }));
+                localStorage.setItem('token', 'facebook-oauth-token-' + Date.now());
+                window.location.href = 'dashboard.html';
+            }
+        });
+    </script>
+</body>
+</html>
