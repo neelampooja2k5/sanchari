@@ -97,20 +97,35 @@ loginForm.addEventListener('submit', async (e) => {
 
     if (!isValid) return;
 
-    // Check against demo user database
-    const user = validateUserCredentials(emailInput.value, passwordInput.value);
-    
-    if (user) {
-        // User found - login successful
-        localStorage.setItem('user', JSON.stringify({
-            email: user.email,
-            name: user.name
-        }));
-        localStorage.setItem('token', 'token-' + user.email);
-        window.location.href = 'dashboard.html';
-    } else {
-        // User not found or wrong password
-        showError(emailInput, 'Invalid email or password. Not registered?');
+    // Send credentials to server
+    try {
+        const response = await fetch('/login', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                email: emailInput.value,
+                password: passwordInput.value
+            })
+        });
+
+        const data = await response.json();
+
+        if (data.success) {
+            // Store user info in localStorage
+            localStorage.setItem('user', JSON.stringify({
+                email: emailInput.value
+            }));
+            localStorage.setItem('token', 'token-' + emailInput.value);
+            window.location.href = 'dashboard.html';
+        } else {
+            // Show error from server
+            showError(emailInput, data.message || 'Invalid credentials');
+        }
+    } catch (error) {
+        console.error('Login error:', error);
+        showError(emailInput, 'Network error. Please try again.');
     }
 });
 

@@ -198,18 +198,15 @@ registerForm.addEventListener('submit', async (e) => {
 
     // Prepare user data
     const userData = {
-        firstName: firstNameInput.value,
-        lastName: lastNameInput.value,
+        fullName: firstNameInput.value + ' ' + lastNameInput.value,
         email: emailInput.value,
-        phone: phoneInput.value,
         password: passwordInput.value,
-        country: countryInput.value,
-        interests: interests
+        confirmPassword: confirmPasswordInput.value
     };
 
     // Send registration request
     try {
-        const response = await fetch('http://localhost:3000/api/auth/register', {
+        const response = await fetch('/register', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -217,28 +214,24 @@ registerForm.addEventListener('submit', async (e) => {
             body: JSON.stringify(userData)
         });
 
-        if (response.ok) {
-            const data = await response.json();
-            localStorage.setItem('user', JSON.stringify(data.user));
-            localStorage.setItem('token', data.token);
+        const data = await response.json();
+
+        if (data.success) {
+            localStorage.setItem('user', JSON.stringify({
+                email: emailInput.value,
+                name: firstNameInput.value + ' ' + lastNameInput.value
+            }));
+            localStorage.setItem('token', 'token-' + emailInput.value);
             window.location.href = 'dashboard.html';
         } else {
-            const error = await response.json();
-            if (error.message.includes('email')) {
-                showError(emailInput, error.message);
+            if (data.message.includes('email')) {
+                showError(emailInput, data.message);
             } else {
-                alert('Registration failed: ' + error.message);
+                alert('Registration failed: ' + data.message);
             }
         }
     } catch (error) {
         console.error('Registration error:', error);
-        // For demo purposes, allow registration
-        localStorage.setItem('user', JSON.stringify({
-            email: emailInput.value,
-            name: firstNameInput.value + ' ' + lastNameInput.value,
-            phone: phoneInput.value,
-            country: countryInput.value
-        }));
-        window.location.href = 'dashboard.html';
+        alert('Error during registration. Please try again.');
     }
 });
