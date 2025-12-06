@@ -3,142 +3,146 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>User Registration - Create Account</title>
-    <!-- Load Bootstrap 5 CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" xintegrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-
-    <!-- Custom Styles for Centering and Aesthetics -->
-    <style>
-        /* Use Inter font for modern look */
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #f8f9fa; /* Very light background */
-            min-height: 100vh;
-            display: flex;
-            align-items: center; /* Vertical centering */
-            justify-content: center; /* Horizontal centering */
-            padding: 1.5rem; /* Padding for mobile view */
-        }
-
-        .signup-container {
-            max-width: 450px;
-            width: 100%;
-        }
-
-        .signup-card {
-            border: none;
-            border-radius: 1.25rem; /* More rounded corners */
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1); /* Soft shadow */
-            padding: 2.5rem 2rem;
-        }
-
-        .form-control {
-            border-radius: 0.75rem;
-            padding: 0.75rem 1rem;
-        }
-
-        .btn-success {
-            border-radius: 0.75rem;
-            padding: 0.75rem 1rem;
-            font-weight: bold;
-            background-color: #198754; /* Default Bootstrap success color */
-            border-color: #198754;
-            transition: background-color 0.3s ease;
-        }
-
-        .btn-success:hover {
-            background-color: #157347;
-            border-color: #157347;
-        }
-    </style>
+    <title>Register - Sanchari</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
+    <div class="register-container">
+        <div class="register-wrapper">
+            <div class="register-card">
+                <div class="header">
+                    <h1>Join Sanchari</h1>
+                    <p>Create your travel profile today</p>
+                </div>
 
-    <div class="signup-container">
-        <div class="card signup-card">
-            <div class="card-body">
-                <h2 class="card-title text-center mb-4 fw-bold text-success">Create Your Account</h2>
-                <p class="text-center text-muted mb-5">Join us today for full access to our services.</p>
+                <form id="registerForm" class="register-form">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="firstName">
+                                <i class="fas fa-user"></i>
+                                First Name
+                            </label>
+                            <input type="text" id="firstName" name="firstName" placeholder="Your first name" required>
+                            <span class="error-message" id="firstNameError"></span>
+                        </div>
 
-                <!-- Signup Form -->
-                <form action="login.html" method="POST" onsubmit="return handleRegister(event)">
-
-                    <!-- Full Name Input -->
-                    <div class="mb-3">
-                        <label for="fullNameInput" class="form-label fw-medium">Full Name</label>
-                        <input type="text" class="form-control" id="fullNameInput" placeholder="Enter your full name" required>
+                        <div class="form-group">
+                            <label for="lastName">
+                                <i class="fas fa-user"></i>
+                                Last Name
+                            </label>
+                            <input type="text" id="lastName" name="lastName" placeholder="Your last name" required>
+                            <span class="error-message" id="lastNameError"></span>
+                        </div>
                     </div>
 
-                    <!-- Email Input -->
-                    <div class="mb-3">
-                        <label for="emailInput" class="form-label fw-medium">Email address</label>
-                        <input type="email" class="form-control" id="emailInput" placeholder="name@example.com" required>
+                    <div class="form-group">
+                        <label for="regEmail">
+                            <i class="fas fa-envelope"></i>
+                            Email Address
+                        </label>
+                        <input type="email" id="regEmail" name="email" placeholder="Enter your email" required>
+                        <span class="error-message" id="regEmailError"></span>
                     </div>
 
-                    <!-- Password Input -->
-                    <div class="mb-3">
-                        <label for="passwordInput" class="form-label fw-medium">Password</label>
-                        <input type="password" class="form-control" id="passwordInput" placeholder="Must be at least 8 characters" required>
+                    <div class="form-group">
+                        <label for="phone">
+                            <i class="fas fa-phone"></i>
+                            Phone Number
+                        </label>
+                        <input type="tel" id="phone" name="phone" placeholder="Your phone number" required>
+                        <span class="error-message" id="phoneError"></span>
                     </div>
 
-                    <!-- Confirm Password Input -->
-                    <div class="mb-4">
-                        <label for="confirmPasswordInput" class="form-label fw-medium">Confirm Password</label>
-                        <input type="password" class="form-control" id="confirmPasswordInput" placeholder="Re-enter your password" required>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="regPassword">
+                                <i class="fas fa-lock"></i>
+                                Password
+                            </label>
+                            <input type="password" id="regPassword" name="password" placeholder="Create a password" required>
+                            <span class="error-message" id="regPasswordError"></span>
+                            <div class="password-strength">
+                                <div class="strength-bar" id="strengthBar"></div>
+                                <small id="strengthText">Weak</small>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="confirmPassword">
+                                <i class="fas fa-lock"></i>
+                                Confirm Password
+                            </label>
+                            <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirm password" required>
+                            <span class="error-message" id="confirmPasswordError"></span>
+                        </div>
                     </div>
 
-                    <!-- Register Button -->
-                    <div class="d-grid gap-2 mb-4">
-                        <button type="submit" class="btn btn-success">Register</button>
+                    <div class="form-group">
+                        <label for="country">
+                            <i class="fas fa-globe"></i>
+                            Country
+                        </label>
+                        <input type="text" id="country" name="country" placeholder="Your country" required>
+                        <span class="error-message" id="countryError"></span>
                     </div>
+
+                    <div class="form-group">
+                        <label for="interests">
+                            <i class="fas fa-heart"></i>
+                            Travel Interests
+                        </label>
+                        <div class="interest-checkboxes">
+                            <label><input type="checkbox" name="interests" value="adventure"> Adventure</label>
+                            <label><input type="checkbox" name="interests" value="culture"> Culture</label>
+                            <label><input type="checkbox" name="interests" value="nature"> Nature</label>
+                            <label><input type="checkbox" name="interests" value="beach"> Beach</label>
+                            <label><input type="checkbox" name="interests" value="historical"> Historical</label>
+                        </div>
+                    </div>
+
+                    <div class="form-group checkbox">
+                        <label>
+                            <input type="checkbox" id="termsCheck" name="terms" required>
+                            I agree to the <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>
+                        </label>
+                        <span class="error-message" id="termsError"></span>
+                    </div>
+
+                    <button type="submit" class="register-btn">
+                        <i class="fas fa-user-plus"></i> Create Account
+                    </button>
                 </form>
 
-                <!-- Link to Login Page -->
-                <div class="text-center">
-                    <p class="mb-0 text-muted">Already have an account?</p>
-                    <a href="login.html" class="text-decoration-none fw-bold text-success">Log in here</a>
+                <div class="login-prompt">
+                    <p>Already have an account? <a href="login.html">Sign In</a></p>
                 </div>
-                <div class="text-center mt-3">
-                    <a href="index.html" class="text-decoration-none text-muted">Back to home</a>
+            </div>
+
+            <div class="register-image">
+                <div class="image-content">
+                    <div class="benefit-box">
+                        <i class="fas fa-check-circle"></i>
+                        <h3>Personalized Recommendations</h3>
+                    </div>
+                    <div class="benefit-box">
+                        <i class="fas fa-check-circle"></i>
+                        <h3>Exclusive Travel Deals</h3>
+                    </div>
+                    <div class="benefit-box">
+                        <i class="fas fa-check-circle"></i>
+                        <h3>24/7 Travel Support</h3>
+                    </div>
+                    <div class="benefit-box">
+                        <i class="fas fa-check-circle"></i>
+                        <h3>Offline Access Features</h3>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Note: Bootstrap JS is included for general completeness, though no interactive JS is used here. -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" xintegrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-    <script>
-        function handleRegister(event) {
-            const fullName = document.getElementById('fullNameInput').value;
-            const email = document.getElementById('emailInput').value;
-            const password = document.getElementById('passwordInput').value;
-            const confirmPassword = document.getElementById('confirmPasswordInput').value;
-            
-            if (!fullName || !email || !password || !confirmPassword) {
-                alert('Please fill in all fields');
-                event.preventDefault();
-                return false;
-            }
-            
-            if (password !== confirmPassword) {
-                alert('Passwords do not match');
-                event.preventDefault();
-                return false;
-            }
-            
-            if (password.length < 8) {
-                alert('Password must be at least 8 characters');
-                event.preventDefault();
-                return false;
-            }
-            
-            // Store user data
-            localStorage.setItem('userName', fullName);
-            localStorage.setItem('userEmail', email);
-            localStorage.setItem('userPassword', password);
-            
-            return true;
-        }
-    </script>
+    <script src="js/register.js"></script>
 </body>
 </html>

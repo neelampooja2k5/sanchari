@@ -3,255 +3,158 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Smart Travel Assistant | Home</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLMDJ8g/zYTYlQ+VlMso3Y4k5W1oT6q3l9mJ2W5qE1F2R5W5z5z5z5z5z5z5z5z5z5z5z5z5z5z5z5z5z5z5z5z5z5z5z5z5z==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <style>
-        .hero-section {
-            /* Placeholder image from Picsum */
-            background: url('https://picsum.photos/1920/1080?random=1') no-repeat center center;
-            background-size: cover;
-            height: 75vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
-            position: relative;
-        }
-        .hero-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.6));
-            z-index: 1;
-        }
-        .hero-content {
-            z-index: 2;
-        }
-        .feature-card {
-            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-            min-height: 250px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            border: none;
-            border-radius: 15px;
-            background-color: #ffffff;
-        }
-        .feature-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1) !important;
-        }
-        .feature-icon {
-            font-size: 3.5rem;
-            margin-bottom: 20px;
-            /* Gradient Text Effect for Icons */
-            background: -webkit-linear-gradient(#0d6efd, #0dcaf0);
-            background: linear-gradient(#0d6efd, #0dcaf0);
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-        .cta-section {
-            padding: 80px 0;
-            background-color: #eef2f5;
-        }
-        .btn-custom {
-            padding: 12px 30px;
-            font-weight: 600;
-            border-radius: 50px;
-        }
-    </style>
+    <title>Sanchari - Smart Tourism Platform</title>
+    <link rel="stylesheet" href="css/home.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
-
-    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
+    <!-- Navigation -->
+    <nav class="navbar">
         <div class="container">
-            <a class="navbar-brand fw-bold text-primary" href="index.html">
-                <i class="fas fa-paper-plane me-2"></i>SmartTrip
-            </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto align-items-center">
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="index.html">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#features">Features</a>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="toolsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Tools</a>
-                        <ul class="dropdown-menu" aria-labelledby="toolsDropdown">
-                            <li><a class="dropdown-item" href="tripplanner.html"><i class="bi bi-map me-2"></i>Trip Planner</a></li>
-                            <li><a class="dropdown-item" href="discover.html"><i class="bi bi-compass me-2"></i>Discover Places</a></li>
-                            <li><a class="dropdown-item" href="translation.html"><i class="bi bi-translate me-2"></i>Translator</a></li>
-                            <li><a class="dropdown-item" href="budget.html"><i class="bi bi-wallet2 me-2"></i>Budget Tracker</a></li>
-                            <li><a class="dropdown-item" href="map.html"><i class="bi bi-geo-alt me-2"></i>Maps</a></li>
-                            <li><a class="dropdown-item" href="safety_alerts.html"><i class="bi bi-exclamation-triangle me-2"></i>Safety Alerts</a></li>
-                            <li><a class="dropdown-item" href="chartbot.html"><i class="bi bi-chat-dots me-2"></i>AI Chatbot</a></li>
-                        </ul>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="login.html">Log In</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link btn btn-primary ms-lg-3 px-4 rounded-pill text-white" href="register.html">Sign Up</a>
-                    </li>
-                </ul>
+            <div class="logo">
+                <i class="fas fa-map-location-dot"></i>
+                <span>Sanchari</span>
             </div>
+            <ul class="nav-links">
+                <li><a href="#features">Features</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+                <li><a href="login.html" class="btn-nav">Login</a></li>
+                <li><a href="register.html" class="btn-nav btn-primary">Sign Up</a></li>
+            </ul>
         </div>
     </nav>
 
-    <header class="hero-section">
-        <div class="hero-overlay"></div>
-        <div class="container text-center hero-content">
-            <h1 class="display-3 fw-bold mb-4">Travel Smarter, Not Harder</h1>
-            <p class="lead mb-5 fs-4">Your AI-powered companion for planning, navigating, and experiencing the world safely.</p>
-            <a href="register.html" class="btn btn-primary btn-custom btn-lg shadow-lg">
-                Start Planning <i class="fas fa-arrow-right ms-2"></i>
-            </a>
-        </div>
-    </header>
-
-    <section id="features" class="py-5 bg-light">
-        <div class="container py-4">
-            <div class="text-center mb-5">
-                <h6 class="text-primary fw-bold text-uppercase ls-md">Features</h6>
-                <h2 class="fw-bold">Everything you need for the perfect trip</h2>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Your Smart Travel Companion</h1>
+            <p>Explore the world with personalized recommendations, offline maps, and AI assistance</p>
+            <div class="hero-buttons">
+                <a href="register.html" class="btn btn-primary btn-lg">Get Started</a>
+                <a href="#features" class="btn btn-secondary btn-lg">Learn More</a>
             </div>
-            
-            <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
-
-                <div class="col">
-                    <div class="card feature-card p-4 shadow-sm">
-                        <i class="fas fa-route feature-icon"></i>
-                        <h4 class="card-title fw-bold">Trip Planner</h4>
-                        <p class="card-text text-muted">Build detailed itineraries in seconds based on your interests and available time.</p>
-                    </div>
-                </div>
-
-                <div class="col">
-                    <div class="card feature-card p-4 shadow-sm">
-                        <i class="fas fa-map-marked-alt feature-icon"></i>
-                        <h4 class="card-title fw-bold">Discover Places</h4>
-                        <p class="card-text text-muted">Uncover hidden gems, top-rated restaurants, and local attractions near you.</p>
-                    </div>
-                </div>
-
-                <div class="col">
-                    <div class="card feature-card p-4 shadow-sm">
-                        <i class="fas fa-language feature-icon"></i>
-                        <h4 class="card-title fw-bold">Live Translator</h4>
-                        <p class="card-text text-muted">Break language barriers instantly with real-time voice and text translation.</p>
-                    </div>
-                </div>
-
-                <div class="col">
-                    <div class="card feature-card p-4 shadow-sm">
-                        <i class="fas fa-robot feature-icon"></i>
-                        <h4 class="card-title fw-bold">AI Assistant</h4>
-                        <p class="card-text text-muted">Chat 24/7 with our AI to solve travel hiccups, book rides, or find answers.</p>
-                    </div>
-                </div>
-
-                <div class="col">
-                    <div class="card feature-card p-4 shadow-sm">
-                        <i class="fas fa-chart-pie feature-icon"></i>
-                        <h4 class="card-title fw-bold">Budget Tracker</h4>
-                        <p class="card-text text-muted">Keep your finances in check with automated expense tracking and currency conversion.</p>
-                    </div>
-                </div>
-
-                <div class="col">
-                    <div class="card feature-card p-4 shadow-sm">
-                        <i class="fas fa-shield-alt feature-icon"></i>
-                        <h4 class="card-title fw-bold">Safety Alerts</h4>
-                        <p class="card-text text-muted">Receive real-time notifications about weather, traffic, and local safety advisories.</p>
-                    </div>
-                </div>
-
+        </div>
+        <div class="hero-image">
+            <div class="image-placeholder">
+                <i class="fas fa-globe"></i>
             </div>
         </div>
     </section>
 
-    <section id="cta" class="cta-section text-center">
+    <!-- Features Section -->
+    <section id="features" class="features">
         <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-lg-8">
-                    <h2 class="fw-bold mb-3 display-5">Ready for your next adventure?</h2>
-                    <p class="lead text-muted mb-4">Join thousands of travelers who are exploring the world smarter.</p>
-                    <a href="register.html" class="btn btn-primary btn-custom btn-lg shadow">
-                        Start Planning Now
-                    </a>
+            <h2>Why Choose Sanchari?</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <i class="fas fa-map"></i>
+                    <h3>Offline Maps</h3>
+                    <p>Download maps and explore destinations without internet connection</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-robot"></i>
+                    <h3>AI Assistant - Sanchari</h3>
+                    <p>24/7 intelligent travel assistant for personalized recommendations</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-hotel"></i>
+                    <h3>Hotel Booking</h3>
+                    <p>Browse and book the best hotels with real reviews and ratings</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-star"></i>
+                    <h3>Tourist Attractions</h3>
+                    <p>Discover nearby attractions, monuments, and hidden gems</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-calendar"></i>
+                    <h3>Itinerary Planning</h3>
+                    <p>Create and manage your perfect travel itinerary</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-ticket"></i>
+                    <h3>Easy Bookings</h3>
+                    <p>One-stop solution for all your travel bookings and reservations</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <footer class="bg-dark text-light pt-5 pb-4">
-        <div class="container text-center text-md-start">
-            <div class="row text-center text-md-start">
-
-                <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3">
-                    <h5 class="text-uppercase mb-4 fw-bold text-primary">SmartTrip</h5>
-                    <p>Empowering travelers with AI-driven insights, safety tools, and seamless planning features.</p>
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="container">
+            <h2>About Sanchari</h2>
+            <p>Sanchari is a comprehensive smart tourism platform designed to make your travel experiences unforgettable. With cutting-edge technology and user-friendly features, we help you discover the world like never before.</p>
+            <div class="stats">
+                <div class="stat">
+                    <h3>100+</h3>
+                    <p>Destinations</p>
                 </div>
-
-                <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mt-3">
-                    <h6 class="text-uppercase mb-4 fw-bold">Product</h6>
-                    <p><a href="#" class="text-light text-decoration-none">Features</a></p>
-                    <p><a href="#" class="text-light text-decoration-none">Pricing</a></p>
-                    <p><a href="#" class="text-light text-decoration-none">API</a></p>
+                <div class="stat">
+                    <h3>5000+</h3>
+                    <p>Hotels</p>
                 </div>
-
-                <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mt-3">
-                    <h6 class="text-uppercase mb-4 fw-bold">Support</h6>
-                    <p><a href="#" class="text-light text-decoration-none">Help Center</a></p>
-                    <p><a href="#" class="text-light text-decoration-none">Terms of Service</a></p>
-                    <p><a href="#" class="text-light text-decoration-none">Privacy Policy</a></p>
+                <div class="stat">
+                    <h3>10000+</h3>
+                    <p>Attractions</p>
                 </div>
-
-                <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mt-3">
-                    <h6 class="text-uppercase mb-4 fw-bold">Contact</h6>
-                    <p><i class="fas fa-home me-3"></i> New York, NY 10012, US</p>
-                    <p><i class="fas fa-envelope me-3"></i> hello@smarttrip.com</p>
-                    <p><i class="fas fa-phone me-3"></i> +1 234 567 8900</p>
+                <div class="stat">
+                    <h3>50000+</h3>
+                    <p>Happy Travelers</p>
                 </div>
             </div>
+        </div>
+    </section>
 
-            <hr class="mb-4">
+    <!-- CTA Section -->
+    <section class="cta">
+        <div class="container">
+            <h2>Ready to Start Your Adventure?</h2>
+            <p>Join thousands of travelers using Sanchari for their journeys</p>
+            <a href="register.html" class="btn btn-primary btn-lg">Create Your Account</a>
+        </div>
+    </section>
 
-            <div class="row align-items-center">
-                <div class="col-md-7 col-lg-8">
-                    <p class="text-center text-md-start mb-0">© 2025 SmartTrip Assistant. All rights reserved.</p>
+    <!-- Footer -->
+    <footer class="footer" id="contact">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Sanchari</h3>
+                    <p>Your smart travel companion for the modern explorer.</p>
                 </div>
-
-                <div class="col-md-5 col-lg-4">
-                    <div class="text-center text-md-end mt-3 mt-md-0">
-                        <ul class="list-unstyled list-inline">
-                            <li class="list-inline-item">
-                                <a href="#" class="btn btn-outline-light btn-floating m-1 rounded-circle" role="button"><i class="fab fa-facebook-f"></i></a>
-                            </li>
-                            <li class="list-inline-item">
-                                <a href="#" class="btn btn-outline-light btn-floating m-1 rounded-circle" role="button"><i class="fab fa-twitter"></i></a>
-                            </li>
-                            <li class="list-inline-item">
-                                <a href="#" class="btn btn-outline-light btn-floating m-1 rounded-circle" role="button"><i class="fab fa-instagram"></i></a>
-                            </li>
-                        </ul>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="login.html">Login</a></li>
+                        <li><a href="register.html">Sign Up</a></li>
+                        <li><a href="#features">Features</a></li>
+                        <li><a href="#">Privacy</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact</h4>
+                    <p>Email: support@sanchari.com</p>
+                    <p>Phone: +1 (555) 123-4567</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Follow Us</h4>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
                     </div>
                 </div>
+            </div>
+            <hr>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Sanchari. All rights reserved.</p>
             </div>
         </div>
     </footer>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script src="js/home.js"></script>
 </body>
 </html>
